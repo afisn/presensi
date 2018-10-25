@@ -19,7 +19,7 @@ public class NextActivity  extends AppCompatActivity {
         tv = (TextView) findViewById(R.id.tv);
 
         for (int i = 0; i < PDCheck_list.list_data.size(); i++){
-            if(PDCheck_list.list_data.get(i).getSelected()) {
+            if(PDCheck_list.list_data.get(i).isSelected()) {
                 tv.setText(tv.getText() + " " + PDCheck_list.list_data.get(i).getNama());
             }
         }

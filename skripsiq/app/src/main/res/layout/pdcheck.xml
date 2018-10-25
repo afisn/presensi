@@ -1,56 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Presensi.PDCheck">
+    tools:context="com.example.lenovoq.skripsiq.Presensi.PDCheck"
+    android:background="@color/graylight"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_checkbox"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="120dp">
         <LinearLayout
+            android:background="@drawable/gradientbackground"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="350dp"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/list_select_all"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Select All" />
 
             <Button
-                android:id="@+id/next"
-                android:layout_width="match_parent"
+                android:id="@+id/editstatusbtn"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select None" />
-
+                android:text="Ubah Status" />
             <Button
-                android:id="@+id/list_select_reverse"
-                android:layout_width="match_parent"
+                android:id="@+id/save_manual"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reverse Select" />
+                android:text="Simpan" />
 
-
-            <Button
-                android:id="@+id/list_remove_selected_rows"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Remove Selected Rows" />
         </LinearLayout>
+    </RelativeLayout>
 
-    </android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+    </LinearLayout>
 
     <ProgressBar
+        android:visibility="gone"
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone" />
-
+        android:layout_centerVertical="true" />
 </LinearLayout>

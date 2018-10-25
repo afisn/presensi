@@ -1,12 +1,13 @@
 package com.example.lenovoq.skripsiq.Presensi;
 
 public class NamaMhs_Obj {
-    private String nrp, nama;
-    private boolean isSelected;
+    private String nrp, nama, status;
+    private boolean check;
 
     public NamaMhs_Obj(String nrp, String nama) {
         this.nrp = nrp;
         this.nama = nama;
+        this.status = status;
     }
 
     public String getNrp() {
@@ -25,11 +26,19 @@ public class NamaMhs_Obj {
         this.nama = nama;
     }
 
-    public boolean getSelected() {
-        return isSelected;
+    public String getStatus() {
+        return status;
     }
 
-    public void setSelected(boolean selected) {
-        isSelected = selected;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public boolean isSelected() {
+        return check;
+    }
+
+    public void setSelected(boolean check) {
+        this.check = check;
     }
 }

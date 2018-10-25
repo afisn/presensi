@@ -24,6 +24,7 @@ public class MainActivityMhs extends AppCompatActivity {
 
     public static final String TAG_ID = "id";
     public static final String TAG_USERNAME = "username";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,7 @@ public class MainActivityMhs extends AppCompatActivity {
 
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
-
+        //ambil value data dari activity sebelum
         id = getIntent().getStringExtra(TAG_ID);
         username = getIntent().getStringExtra(TAG_USERNAME);
 
@@ -45,6 +46,8 @@ public class MainActivityMhs extends AppCompatActivity {
         btn_jadwal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent o = new Intent(MainActivityMhs.this, JadwalMhs.class);
+                //ngirim data yang ada di activity ini ke activity yang dituju
+                o.putExtra("username",username);
                 startActivity(o);
             }
         });

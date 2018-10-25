@@ -15,9 +15,10 @@ import android.widget.TextView;
 import com.example.lenovoq.skripsiq.JadwalDsn.JadwalDosen;
 import com.example.lenovoq.skripsiq.Presensi.PresensiDosen;
 import com.example.lenovoq.skripsiq.Help.Help;
+import com.example.lenovoq.skripsiq.WifiDirect.Wifi_Main;
 
 public class MainActivityPengajar extends AppCompatActivity {
-    Button btn_jadwal, btn_presensi;
+    Button btn_jadwal, btn_presensi, btn_presensiplus;
     TextView txt_id, txt_username;
     String id, username;
     SharedPreferences sharedpreferences;
@@ -33,6 +34,7 @@ public class MainActivityPengajar extends AppCompatActivity {
         txt_username = (TextView) findViewById(R.id.txt_username);
         btn_jadwal = (Button) findViewById(R.id.btn_jadwal);
         btn_presensi = (Button) findViewById(R.id.btn_presensi);
+        btn_presensiplus = (Button) findViewById(R.id.btn_presensi_wifi);
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
 
@@ -56,6 +58,12 @@ public class MainActivityPengajar extends AppCompatActivity {
             }
         });
 
+        btn_presensiplus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent o = new Intent(MainActivityPengajar.this, Wifi_Main.class);
+                startActivity(o);
+            }
+        });
 
     }
 

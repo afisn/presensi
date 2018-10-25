@@ -13,4 +13,7 @@
     <dimen name="button_text">18sp</dimen>
     <dimen name="ob_header_text_size">22sp</dimen>
     <dimen name="ob_desc_text_size">18sp</dimen>
+
+    <dimen name="tablet_list_width">300dp</dimen>
+    <dimen name="phone_list_height">200dp</dimen>
 </resources>
