@@ -1,5 +1,7 @@
 package com.example.lenovoq.skripsiq.JadwalMhs;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +27,7 @@ import com.example.lenovoq.skripsiq.Login;
 import com.example.lenovoq.skripsiq.R;
 import com.example.lenovoq.skripsiq.Volley.AppController;
 import com.example.lenovoq.skripsiq.Volley.Server;
+import com.example.lenovoq.skripsiq.Login;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +45,9 @@ public class JadwalMhs extends AppCompatActivity {
 
     private String url = Server.URL + "jadwal_mahasiswa.php";
     private static final String TAG = JadwalMhs.class.getSimpleName();
+
+    SharedPreferences sharedpreferences;
+    public static final String my_shared_preferences = "my_shared_preferences";
     String username ;
 
     @Override
@@ -52,7 +58,8 @@ public class JadwalMhs extends AppCompatActivity {
         getSupportActionBar().setTitle("Jadwal Perkuliahan");
         ac.setDisplayHomeAsUpEnabled(true);
 
-
+        sharedpreferences = getSharedPreferences(my_shared_preferences, Context.MODE_PRIVATE);
+        username =  sharedpreferences.getString(Login.TAG_USERNAME, null);
 
         rv=(RecyclerView)findViewById(R.id.recyclerview);
         rv.setHasFixedSize(true);
@@ -60,19 +67,19 @@ public class JadwalMhs extends AppCompatActivity {
 
         list_data=new ArrayList<>();
 
-        if(getIntent()!=null){
-            username = getIntent().getStringExtra("username");
-            Log.d("Afis", "onCreate: "+username);
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    // Do something after 5s = 5000ms
-                    ListJadwalMhs(username);
-                }
-            }, 3000);
-
-        }
+//        if(getIntent()!=null){
+//            username = getIntent().getStringExtra("username");
+//            Log.d("Afis", "onCreate: "+username);
+//            final Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    // Do something after 5s = 5000ms
+                    ListJadwalMhs();
+//                }
+//            }, 3000);
+//
+//        }
 
 
 
@@ -89,12 +96,13 @@ public class JadwalMhs extends AppCompatActivity {
 
     }
 
-    public void ListJadwalMhs(final String username){
+    public void ListJadwalMhs(){
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         //making the progressbar visible
         progressBar.setVisibility(View.VISIBLE);
 
         //creating a string request to send request to the url
+        url = url+"?username="+username;
         StringRequest strReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
             public void onResponse(String response) {
@@ -127,27 +135,11 @@ public class JadwalMhs extends AppCompatActivity {
                 Log.e(TAG, "Login Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
-
-
-
             }
-        }) {
+        });
 
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("username", username);
-                return params;
-            }
-
-        };
-
-        // Adding request to request queue
-//        AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(strReq );
     }
 
-    String tag_json_obj = "json_obj_req";
 }
