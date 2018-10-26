@@ -1,7 +1,9 @@
 package com.example.lenovoq.skripsiq.Presensi;
 
+
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ public class PresensiDosenList extends RecyclerView.Adapter<PresensiDosenList.Vi
 
     private List<MatkulDosen_Obj> list_data;
 
+
     public PresensiDosenList(List<MatkulDosen_Obj> list_data) {
         this.list_data = list_data;
     }
@@ -27,17 +30,27 @@ public class PresensiDosenList extends RecyclerView.Adapter<PresensiDosenList.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        MatkulDosen_Obj listData = list_data.get(position);
+        final MatkulDosen_Obj listData = list_data.get(position);
         //kalau integer pake string value of
-        holder.txttahun.setText(String.valueOf(listData.getTahun()));
+        holder.txtmet_id.setText(String.valueOf(listData.getMet_id()));
         //kalau string langsung aja diset
-        holder.txtperiode.setText(listData.getPeriode());
         holder.txtkd_mk.setText(listData.getKd_mk());
         holder.txtnama_mk.setText(listData.getNama_mk());
         holder.txtkelas.setText(listData.getKelas());
         holder.txthari.setText(listData.getHari());
         holder.txtjam_mulai.setText(listData.getJam_mulai());
         holder.txtjam_selesai.setText(listData.getJam_selesai());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int id = listData.getMet_id();
+                Log.e("Afis", "id" + listData.getMet_id());
+                Intent intent = new Intent(view.getContext(), PDCheck.class);
+                intent.putExtra("Met_id",id);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -46,14 +59,12 @@ public class PresensiDosenList extends RecyclerView.Adapter<PresensiDosenList.Vi
     }
 
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtid, txttahun, txtperiode, txtkd_mk, txtnama_mk, txtkelas, txthari, txtjam_mulai, txtjam_selesai, txtpengajar;
+        private TextView txtmet_id, txtkd_mk, txtnama_mk, txtkelas, txthari, txtjam_mulai, txtjam_selesai;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            txttahun = (TextView) itemView.findViewById(R.id.txttahun);
-            txtperiode = (TextView) itemView.findViewById(R.id.txtperiode);
+            txtmet_id = (TextView) itemView.findViewById(R.id.txtmet_id);
             txtkd_mk = (TextView) itemView.findViewById(R.id.txtkd_mk);
             txtnama_mk = (TextView) itemView.findViewById(R.id.txtnama_mk);
             txtkelas = (TextView) itemView.findViewById(R.id.txtkelas);
@@ -62,14 +73,13 @@ public class PresensiDosenList extends RecyclerView.Adapter<PresensiDosenList.Vi
             txtjam_selesai = (TextView) itemView.findViewById(R.id.txtjam_selesai);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), PDCheck.class);
-                    v.getContext().startActivity(intent);
-                   // Toast.makeText(v.getContext(), "os version is: " + feed.getTitle(), Toast.LENGTH_SHORT).show();
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(v.getContext(), PDCheck.class);
+//                    v.getContext().startActivity(intent);
+//                }
+//            });
         }
     }
 }

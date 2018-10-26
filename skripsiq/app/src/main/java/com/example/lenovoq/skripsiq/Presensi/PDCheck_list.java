@@ -46,11 +46,11 @@ public class PDCheck_list extends RecyclerView.Adapter<PDCheck_list.ViewHolder> 
         holder.status.setText(list_data.get(position).getStatus());
 
 //        holder.checkBox.setTag(R.integer.btnplusview, convertView);
-        Log.d("Afis", "onBindViewHolder: "+list_data.get(position).isSelected());
-        if(list_data.get(position).isSelected()){
+        Log.d("Afis", "onBindViewHolder: " + list_data.get(position).isSelected());
+        if (list_data.get(position).isSelected()) {
 
             holder.checkBox.setSelected(true);
-        }else{
+        } else {
             holder.checkBox.setSelected(false);
         }
         holder.checkBox.setTag(position);
@@ -66,7 +66,6 @@ public class PDCheck_list extends RecyclerView.Adapter<PDCheck_list.ViewHolder> 
                 } else {
                     list_data.get(position).setSelected(true);
                 }
-
 
 
             }
@@ -136,7 +135,7 @@ public class PDCheck_list extends RecyclerView.Adapter<PDCheck_list.ViewHolder> 
 //            }
 //        }
 
-//        public void setItemClickListener(ItemClickListener ic) {
+        //        public void setItemClickListener(ItemClickListener ic) {
 //            this.itemClickListener = ic;
 //        }
 //

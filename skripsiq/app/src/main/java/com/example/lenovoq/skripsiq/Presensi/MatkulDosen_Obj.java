@@ -1,14 +1,13 @@
 package com.example.lenovoq.skripsiq.Presensi;
 
 public class MatkulDosen_Obj {
-    private int tahun;
-    private String periode, kd_mk, nama_mk, kelas, hari, jam_mulai, jam_selesai;
+    private int met_id;
+    private String kd_mk, nama_mk, kelas, hari, jam_mulai, jam_selesai;
 
 
-    public MatkulDosen_Obj(int tahun, String periode, String kd_mk, String nama_mk, String kelas,
+    public MatkulDosen_Obj(int met_id,  String kd_mk, String nama_mk, String kelas,
                            String hari, String jam_mulai, String jam_selesai) {
-        this.tahun = tahun;
-        this.periode = periode;
+        this.met_id = met_id;
         this.kd_mk = kd_mk;
         this.nama_mk = nama_mk;
         this.kelas = kelas;
@@ -17,11 +16,7 @@ public class MatkulDosen_Obj {
         this.jam_selesai = jam_selesai;
     }
 
-    public int getTahun() { return tahun; }
-
-    public String getPeriode() {
-        return periode;
-    }
+    public int getMet_id() { return met_id; }
 
     public String getKd_mk() {
         return kd_mk;

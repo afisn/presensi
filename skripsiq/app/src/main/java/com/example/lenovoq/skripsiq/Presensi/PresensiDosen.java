@@ -1,5 +1,6 @@
 package com.example.lenovoq.skripsiq.Presensi;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -79,7 +80,7 @@ public class PresensiDosen extends AppCompatActivity {
                     Log.e("Successfully Login!", jsonObject.toString());
                     for (int i=0; i<array.length(); i++ ){
                         JSONObject ob=array.getJSONObject(i);
-                        MatkulDosen_Obj listData=new MatkulDosen_Obj( ob.getInt("Tahun"),ob.getString("Periode_Sem"),ob.getString("Kode_MK")
+                        MatkulDosen_Obj listData=new MatkulDosen_Obj( ob.getInt("met_id"),ob.getString("Kode_MK")
                                 ,ob.getString("Nama_MK"),ob.getString("Kelas"),ob.getString("Hari")
                                 ,ob.getString("jam_mulai"),ob.getString("jam_selesai"));
                         presensidosen_list.add(listData);

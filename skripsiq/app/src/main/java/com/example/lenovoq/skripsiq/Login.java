@@ -44,7 +44,7 @@ public class Login extends Activity {
     private static final String TAG_MESSAGE = "message";
     public final static String TAG_USERNAME = "username";
     public final static String TAG_ROLE = "role";
-    public final static String TAG_Ref_id = "ref_id";
+//    public final static String TAG_Ref_id = "ref_id";
 
     String tag_json_obj = "json_obj_req";
 
@@ -151,7 +151,7 @@ public class Login extends Activity {
                     if (success == 1) {
                         String username = jObj.getString(TAG_USERNAME);
                         String role = jObj.getString(TAG_ROLE);
-                        String ref_id = jObj.getString(TAG_Ref_id);
+//                        String ref_id = jObj.getString(TAG_Ref_id);
 
                         Log.e("Successfully Login!", jObj.toString());
 
@@ -162,7 +162,7 @@ public class Login extends Activity {
                         editor.putBoolean(session_status, true);
                         editor.putString(TAG_ROLE, role);
                         editor.putString(TAG_USERNAME, username);
-                        editor.putString(TAG_Ref_id, ref_id);
+//                        editor.putString(TAG_Ref_id, ref_id);
                         editor.commit();
 
                         //role untuk login

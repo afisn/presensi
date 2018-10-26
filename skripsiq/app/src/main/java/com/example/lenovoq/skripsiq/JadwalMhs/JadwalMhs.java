@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -66,22 +65,7 @@ public class JadwalMhs extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
 
         list_data=new ArrayList<>();
-
-//        if(getIntent()!=null){
-//            username = getIntent().getStringExtra("username");
-//            Log.d("Afis", "onCreate: "+username);
-//            final Handler handler = new Handler();
-//            handler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    // Do something after 5s = 5000ms
-                    ListJadwalMhs();
-//                }
-//            }, 3000);
-//
-//        }
-
-
+        ListJadwalMhs();
 
     }
 

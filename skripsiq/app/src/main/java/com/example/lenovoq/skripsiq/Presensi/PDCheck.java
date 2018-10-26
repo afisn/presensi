@@ -46,6 +46,8 @@ public class PDCheck extends AppCompatActivity {
     private String[] statusmhs;
     private String spinner_item;
 
+    private int met_id = getIntent().getIntExtra("Met_id",id);
+
     private String url = Server.URL + "nama_mhs.php";
 
     @Override
@@ -77,9 +79,6 @@ public class PDCheck extends AppCompatActivity {
                     adapter.list_data.get(i).setSelected(true);
                     Log.d("Afis", "onClick: "+adapter.list_data.get(i).isSelected());
                 }
-
-//                adapter = new PDCheck_list(PDCheck_list);
-
                 adapter.notifyDataSetChanged();
 //                rv.setAdapter(adapter);
 
