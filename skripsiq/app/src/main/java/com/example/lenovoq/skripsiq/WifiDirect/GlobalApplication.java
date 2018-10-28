@@ -6,6 +6,7 @@ import android.content.Context;
 public class GlobalApplication extends Application {
     private static Context GlobalContext;
 
+
     @Override
     public void onCreate() {
         // TODO Auto-generated method stub

@@ -20,14 +20,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jadwal Mengajar"
-                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Semester Ganjil 2018"
-                android:textAlignment="center"
+                android:layout_gravity="center"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
         </LinearLayout>
@@ -42,7 +43,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
 
         </android.support.v7.widget.RecyclerView>
 

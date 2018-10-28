@@ -1,8 +1,6 @@
 package com.example.lenovoq.skripsiq.Presensi;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,12 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,7 +20,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.lenovoq.skripsiq.Coba.NextActivity;
 import com.example.lenovoq.skripsiq.R;
 import com.example.lenovoq.skripsiq.Volley.Server;
 
@@ -35,7 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class PDCheck extends AppCompatActivity {
     private RecyclerView rv;
@@ -44,9 +37,8 @@ public class PDCheck extends AppCompatActivity {
     private Button btnselect, btnedit, btnsimpan;
 
     private String[] statusmhs;
-    private String spinner_item;
+    private int met_id;
 
-    private int met_id = getIntent().getIntExtra("Met_id",id);
 
     private String url = Server.URL + "nama_mhs.php";
 
@@ -65,6 +57,10 @@ public class PDCheck extends AppCompatActivity {
         itemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.line));
         rv.addItemDecoration(itemDecoration);
 
+        //dapet id pertemuan dari presensidosen
+        met_id = getIntent().getIntExtra("Met_id", 0);
+        Log.e("afis", "met_id" + met_id);
+
         PDCheck_list = new ArrayList<>();
         ambilnama(false);
 
@@ -73,11 +69,10 @@ public class PDCheck extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("Afis", "onClick: Tes");
                 int size = PDCheck_list.size();
-                for(int i=0;i<size;i++)
-                {
+                for (int i = 0; i < size; i++) {
                     PDCheck_list.get(i).setSelected(true);
                     adapter.list_data.get(i).setSelected(true);
-                    Log.d("Afis", "onClick: "+adapter.list_data.get(i).isSelected());
+                    Log.d("Afis", "onClick: " + adapter.list_data.get(i).isSelected());
                 }
                 adapter.notifyDataSetChanged();
 //                rv.setAdapter(adapter);
@@ -94,7 +89,7 @@ public class PDCheck extends AppCompatActivity {
 //                                modelArrayList = getModel(true);
 //                                customAdapter = new CustomAdapter(MainActivity.this,modelArrayList);
 //                                recyclerView.setAdapter(customAdapter);
-                                Intent o = new Intent(PDCheck.this, NextActivity.class);
+                                Intent o = new Intent(PDCheck.this, BeritaAcara.class);
                                 startActivity(o);
                             }
                         })
@@ -110,23 +105,34 @@ public class PDCheck extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(PDCheck.this);
+                statusmhs = getResources().getStringArray(R.array.statusmhs_array);
                 builder.setTitle(R.string.title)
-                        .setItems(R.array.statusmhs_array, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
+                        .setItems(statusmhs, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int position) {
+                                int size = PDCheck_list.size();
+                                for (int i = 0; i < size; i++) {
+                                    PDCheck_list.get(i).setStatus(statusmhs[position]);
+                                }
+                                adapter.notifyDataSetChanged();
+//                              String clickedItemValue = Arrays.asList(statusmhs.array).get(which);
+//                                //Set the TextView text color corresponded to the user selected color
+//                                adapter.list_data.setStatus(clickedItemValue);
                             }
+
                         });
                 builder.show();
             }
         });
     }
 
+
     public void ambilnama(final boolean check) {
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         //making the progressbar visible
         progressBar.setVisibility(View.VISIBLE);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        url = url + "?met_id=" + met_id;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {

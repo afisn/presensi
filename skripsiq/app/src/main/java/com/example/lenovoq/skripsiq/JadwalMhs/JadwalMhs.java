@@ -47,7 +47,7 @@ public class JadwalMhs extends AppCompatActivity {
 
     SharedPreferences sharedpreferences;
     public static final String my_shared_preferences = "my_shared_preferences";
-    String username ;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -16,12 +16,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/txttahun"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/txtperiode"
+            android:id="@+id/txtmet_id"
             android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -59,10 +54,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/txthari"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
 
         <TextView
@@ -95,6 +86,17 @@
             app:layout_constraintLeft_toRightOf="@+id/txtjam_mulai"
             app:layout_constraintEnd_toStartOf="@+id/media_image"
             />
+
+        <TextView
+            android:id="@+id/txthari"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/txtjam_mulai"/>
+
 
         <ImageView
             android:id="@+id/media_image"
