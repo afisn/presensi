@@ -82,23 +82,9 @@ public class PDCheck extends AppCompatActivity {
         btnsimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(PDCheck.this);
-                builder.setMessage("Anda yakin dengan ini?")
-                        .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-//                                modelArrayList = getModel(true);
-//                                customAdapter = new CustomAdapter(MainActivity.this,modelArrayList);
-//                                recyclerView.setAdapter(customAdapter);
-                                Intent o = new Intent(PDCheck.this, BeritaAcara.class);
-                                startActivity(o);
-                            }
-                        })
-                        .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                builder.show();
+
+                Intent o = new Intent(PDCheck.this, BeritaAcara.class);
+                startActivity(o);
             }
         });
         btnedit.setOnClickListener(new View.OnClickListener() {
@@ -110,15 +96,13 @@ public class PDCheck extends AppCompatActivity {
                         .setItems(statusmhs, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int position) {
                                 int size = PDCheck_list.size();
-                                for (int i = 0; i < size; i++) {
+                                for (int i = 0; i < size; i++)
+                                if (PDCheck_list.get(i).isSelected()){
                                     PDCheck_list.get(i).setStatus(statusmhs[position]);
+                                    PDCheck_list.get(i).setSelected(false);
                                 }
                                 adapter.notifyDataSetChanged();
-//                              String clickedItemValue = Arrays.asList(statusmhs.array).get(which);
-//                                //Set the TextView text color corresponded to the user selected color
-//                                adapter.list_data.setStatus(clickedItemValue);
                             }
-
                         });
                 builder.show();
             }

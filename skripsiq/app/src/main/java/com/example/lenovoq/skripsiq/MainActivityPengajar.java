@@ -12,13 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.lenovoq.skripsiq.History.History_Dsn;
 import com.example.lenovoq.skripsiq.JadwalDsn.JadwalDosen;
 import com.example.lenovoq.skripsiq.Presensi.PresensiDosen;
 import com.example.lenovoq.skripsiq.Help.Help;
 import com.example.lenovoq.skripsiq.WifiDirect.Wifi_Main;
 
 public class MainActivityPengajar extends AppCompatActivity {
-    Button btn_jadwal, btn_presensi, btn_presensiplus;
+    Button btn_jadwal, btn_presensi, btn_presensiplus, btn_history;
     TextView txt_id, txt_username;
     String id, username;
     SharedPreferences sharedpreferences;
@@ -35,6 +36,7 @@ public class MainActivityPengajar extends AppCompatActivity {
         btn_jadwal = (Button) findViewById(R.id.btn_jadwal);
         btn_presensi = (Button) findViewById(R.id.btn_presensi);
         btn_presensiplus = (Button) findViewById(R.id.btn_presensi_wifi);
+        btn_history = (Button) findViewById(R.id.btn_history);
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
 
@@ -64,6 +66,13 @@ public class MainActivityPengajar extends AppCompatActivity {
                 startActivity(o);
             }
         });
+        btn_history.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent o = new Intent(MainActivityPengajar.this, History_Dsn.class);
+                startActivity(o);
+            }
+        });
+
 
     }
 
@@ -78,12 +87,12 @@ public class MainActivityPengajar extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-          case R.id.action_about:
+            case R.id.action_about:
                 Intent Iabout = new Intent(this, About.class);
                 this.startActivity(Iabout);
                 return true;
 
-          case R.id.action_help:
+            case R.id.action_help:
                 Intent ihelp = new Intent(this, Help.class);
                 this.startActivity(ihelp);
                 return true;
