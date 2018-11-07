@@ -18,13 +18,14 @@
     <string name="discover_peers_button">Discover</string>
     <string name="get_file_button">Launch Gallery</string>
     <string name="title">Ubah Status Kehadiran Mahasiswa</string>
+    <string name="client_text">This device will act as a client. Click on Gallery button to pick a local(stored) file</string>
 
     <string-array name="statusmhs_array">
         <item>Hadir</item>
         <item>Sakit</item>
         <item>Ijin</item>
-        <item>Tidak hadir</item>
         <item>Tugas</item>
+        <item>Tidak hadir</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

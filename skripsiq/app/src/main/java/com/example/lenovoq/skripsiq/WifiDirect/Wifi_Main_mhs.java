@@ -1,6 +1,5 @@
 package com.example.lenovoq.skripsiq.WifiDirect;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +24,7 @@ import com.example.lenovoq.skripsiq.R;
 
 import com.example.lenovoq.skripsiq.WifiDirect.DeviceListFragment.DeviceActionListener;
 
-public class Wifi_Main extends AppCompatActivity implements ChannelListener, DeviceActionListener {
+public class Wifi_Main_mhs extends AppCompatActivity implements ChannelListener, DeviceActionListener {
     public static final String TAG = "wifidirectdemo";
     private WifiP2pManager manager;
     private boolean isWifiP2pEnabled = false;
@@ -33,12 +32,14 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
     private final IntentFilter intentFilter = new IntentFilter();
     private Channel channel;
     private BroadcastReceiver receiver = null;
+
     /**
      * @param isWifiP2pEnabled the isWifiP2pEnabled to set
      */
     public void setIsWifiP2pEnabled(boolean isWifiP2pEnabled) {
         this.isWifiP2pEnabled = isWifiP2pEnabled;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,18 +53,23 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
         channel = manager.initialize(this, getMainLooper(), null);
         discover();
     }
-    /** register the BroadcastReceiver with the intent values to be matched */
+
+    /**
+     * register the BroadcastReceiver with the intent values to be matched
+     */
     @Override
     public void onResume() {
         super.onResume();
-        receiver = new WifiDiretBroadcastReceiver(manager, channel, this);
+        receiver = new WifiDirectBroadcastReceiverMhs(manager, channel,this);
         registerReceiver(receiver, intentFilter);
     }
+
     @Override
     public void onPause() {
         super.onPause();
         unregisterReceiver(receiver);
     }
+
     /**
      * Remove all peers and clear all fields. This is called on
      * BroadcastReceiver receiving a state change event.
@@ -80,12 +86,14 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
             fragmentDetails.resetViews();
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu_p2p, menu);
         return true;
     }
+
     /*
      * (non-Javadoc)
      * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
@@ -110,9 +118,9 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
         }
     }
 
-    public void discover(){
+    public void discover() {
         if (!isWifiP2pEnabled) {
-            Toast.makeText(Wifi_Main.this, R.string.p2p_off_warning,
+            Toast.makeText(Wifi_Main_mhs.this, R.string.p2p_off_warning,
                     Toast.LENGTH_SHORT).show();
 //            return true;
         }
@@ -122,39 +130,42 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
         manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
             @Override
             public void onSuccess() {
-                Toast.makeText(Wifi_Main.this, "Discovery Initiated",
+                Toast.makeText(Wifi_Main_mhs.this, "Discovery Initiated",
                         Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onFailure(int reasonCode) {
-                Toast.makeText(Wifi_Main.this, "Discovery Failed : " + reasonCode,
+                Toast.makeText(Wifi_Main_mhs.this, "Discovery Failed : " + reasonCode,
                         Toast.LENGTH_SHORT).show();
             }
         });
 //        return true;
     }
+
     @Override
     public void showDetails(WifiP2pDevice device) {
         DeviceDetailFragment fragment = (DeviceDetailFragment) getFragmentManager()
                 .findFragmentById(R.id.frag_detail);
         fragment.showDetails(device);
     }
+
     @Override
     public void connect(WifiP2pConfig config) {
-        config.wps.setup = WpsInfo.PBC;
-        config.groupOwnerIntent = 15; // I want this device to become the owner
-        manager.connect(channel, config, new ActionListener() {
+      manager.connect(channel, config, new ActionListener() {
             @Override
             public void onSuccess() {
                 // WiFiDirectBroadcastReceiver will notify us. Ignore for now.
             }
+
             @Override
             public void onFailure(int reason) {
-                Toast.makeText(Wifi_Main.this, "Connect failed. Retry.",
+                Toast.makeText(Wifi_Main_mhs.this, "Connect failed. Retry.",
                         Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     @Override
     public void disconnect() {
         final DeviceDetailFragment fragment = (DeviceDetailFragment) getFragmentManager()
@@ -165,12 +176,14 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
             public void onFailure(int reasonCode) {
                 Log.d(TAG, "Disconnect failed. Reason :" + reasonCode);
             }
+
             @Override
             public void onSuccess() {
                 fragment.getView().setVisibility(View.GONE);
             }
         });
     }
+
     @Override
     public void onChannelDisconnected() {
         // we will try once more
@@ -185,6 +198,7 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
                     Toast.LENGTH_LONG).show();
         }
     }
+
     @Override
     public void cancelDisconnect() {
         /*
@@ -203,12 +217,13 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
                 manager.cancelConnect(channel, new ActionListener() {
                     @Override
                     public void onSuccess() {
-                        Toast.makeText(Wifi_Main.this, "Aborting connection",
+                        Toast.makeText(Wifi_Main_mhs.this, "Aborting connection",
                                 Toast.LENGTH_SHORT).show();
                     }
+
                     @Override
                     public void onFailure(int reasonCode) {
-                        Toast.makeText(Wifi_Main.this,
+                        Toast.makeText(Wifi_Main_mhs.this,
                                 "Connect abort request failed. Reason Code: " + reasonCode,
                                 Toast.LENGTH_SHORT).show();
                     }

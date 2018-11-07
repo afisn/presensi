@@ -14,12 +14,15 @@ import android.widget.TextView;
 
 import com.example.lenovoq.skripsiq.JadwalMhs.JadwalMhs;
 import com.example.lenovoq.skripsiq.Help.Help;
+import com.example.lenovoq.skripsiq.JadwalMhs.PresensiMhs;
+import com.example.lenovoq.skripsiq.WifiDirect.Wifi_Main;
+import com.example.lenovoq.skripsiq.WifiDirect.Wifi_Main_mhs;
 
 
 public class MainActivityMhs extends AppCompatActivity {
     TextView txt_id, txt_username;
     String id, username;
-    Button btn_jadwal, btn_kehadiran;
+    Button btn_jadwal, btn_kehadiran, btn_presensi;
     SharedPreferences sharedpreferences;
 
     public static final String TAG_ID = "id";
@@ -32,8 +35,8 @@ public class MainActivityMhs extends AppCompatActivity {
         txt_id = (TextView) findViewById(R.id.txt_id);
         txt_username = (TextView) findViewById(R.id.txt_username);
         btn_jadwal = (Button) findViewById(R.id.btn_jadwal);
-//        btn_presensi = (Button) findViewById(R.id.btn_presensi);
-
+        btn_presensi = (Button) findViewById(R.id.btn_presensi_wifi);
+        btn_kehadiran = (Button) findViewById(R.id.btn_kehadiran);
 
         sharedpreferences = getSharedPreferences(Login.my_shared_preferences, Context.MODE_PRIVATE);
         //ambil value data dari activity sebelum
@@ -52,12 +55,20 @@ public class MainActivityMhs extends AppCompatActivity {
             }
         });
 
-//        btn_presensi.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Intent o = new Intent(MainActivityPengajar.this, PresensiDosen.class);
-//                startActivity(o);
-//            }
-//        });
+        btn_presensi.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent o = new Intent(MainActivityMhs.this, Wifi_Main_mhs.class);
+                startActivity(o);
+            }
+        });
+
+        btn_kehadiran.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent o = new Intent(MainActivityMhs.this, PresensiMhs.class);
+                o.putExtra("username",username);
+                startActivity(o);
+            }
+        });
     }
 
     @Override

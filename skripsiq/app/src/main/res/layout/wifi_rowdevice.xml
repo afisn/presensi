@@ -6,18 +6,17 @@
     android:background="?android:attr/activatedBackgroundIndicator"
     android:padding="6dip">
     <ImageView
-        android:id="@+id/iv_Icon"
+        android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:layout_marginRight="2dip"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_marginRight="2dip" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dip"
         android:layout_weight="1"
         android:layout_height="fill_parent">
         <TextView
-            android:id="@+id/tv_deviceName"
+            android:id="@+id/device_name"
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
@@ -26,8 +25,8 @@
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
-            android:id="@+id/tv_deviceDetails"
-            android:maxLines="1"
+            android:id="@+id/device_details"
+            android:singleLine="true"
             android:ellipsize="marquee" />
     </LinearLayout>
 </LinearLayout>

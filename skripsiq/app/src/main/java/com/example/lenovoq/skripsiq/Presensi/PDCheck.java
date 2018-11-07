@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.lenovoq.skripsiq.R;
 import com.example.lenovoq.skripsiq.Volley.Server;
+import com.example.lenovoq.skripsiq.Presensi.BeritaAcara;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +33,7 @@ import java.util.Arrays;
 
 public class PDCheck extends AppCompatActivity {
     private RecyclerView rv;
-    private ArrayList<NamaMhs_Obj> PDCheck_list;
+
     private PDCheck_list adapter;
     private Button btnselect, btnedit, btnsimpan;
 
@@ -61,16 +62,17 @@ public class PDCheck extends AppCompatActivity {
         met_id = getIntent().getIntExtra("Met_id", 0);
         Log.e("afis", "met_id" + met_id);
 
-        PDCheck_list = new ArrayList<>();
+        BeritaAcara.kump_mhs = new ArrayList<>();
+
         ambilnama(false);
 
         btnselect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("Afis", "onClick: Tes");
-                int size = PDCheck_list.size();
+                int size = BeritaAcara.kump_mhs.size();
                 for (int i = 0; i < size; i++) {
-                    PDCheck_list.get(i).setSelected(true);
+                    BeritaAcara.kump_mhs.get(i).setSelected(true);
                     adapter.list_data.get(i).setSelected(true);
                     Log.d("Afis", "onClick: " + adapter.list_data.get(i).isSelected());
                 }
@@ -84,6 +86,7 @@ public class PDCheck extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent o = new Intent(PDCheck.this, BeritaAcara.class);
+                o.putExtra("Met_id",met_id);
                 startActivity(o);
             }
         });
@@ -95,11 +98,13 @@ public class PDCheck extends AppCompatActivity {
                 builder.setTitle(R.string.title)
                         .setItems(statusmhs, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int position) {
-                                int size = PDCheck_list.size();
+                                int size = BeritaAcara.kump_mhs.size();
                                 for (int i = 0; i < size; i++)
-                                if (PDCheck_list.get(i).isSelected()){
-                                    PDCheck_list.get(i).setStatus(statusmhs[position]);
-                                    PDCheck_list.get(i).setSelected(false);
+                                if (BeritaAcara.kump_mhs.get(i).isSelected()){
+                                    BeritaAcara.kump_mhs.get(i).setStatus(statusmhs[position]);
+                                    BeritaAcara.kump_mhs.get(i).setId_status(position + 1);
+                                    Log.e("status", BeritaAcara.kump_mhs.get(i).getId_status() + "");
+                                    BeritaAcara.kump_mhs.get(i).setSelected(false);
                                 }
                                 adapter.notifyDataSetChanged();
                             }
@@ -130,10 +135,11 @@ public class PDCheck extends AppCompatActivity {
                         NamaMhs_Obj list = new NamaMhs_Obj(ob.getString("Nama_Mhs"), ob.getString("NRP"));
                         list.setSelected(check);
                         list.setStatus("tidak hadir");
-                        PDCheck_list.add(list);
+                        list.setId_status(5);
+                        BeritaAcara.kump_mhs.add(list);
 
                     }
-                    adapter = new PDCheck_list(PDCheck_list);
+                    adapter = new PDCheck_list(BeritaAcara.kump_mhs);
                     rv.setAdapter(adapter);
 
                 } catch (JSONException e) {
