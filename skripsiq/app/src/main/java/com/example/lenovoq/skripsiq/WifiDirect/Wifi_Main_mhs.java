@@ -43,7 +43,7 @@ public class Wifi_Main_mhs extends AppCompatActivity implements ChannelListener,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wifidirect_main);
+        setContentView(R.layout.wifidirect_main_mhs);
         // add necessary intent values to be matched.
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);

@@ -1,5 +1,7 @@
 package com.example.lenovoq.skripsiq.Presensi;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.lenovoq.skripsiq.Login;
 import com.example.lenovoq.skripsiq.R;
 import com.example.lenovoq.skripsiq.Volley.Server;
 
@@ -32,7 +35,10 @@ public class PresensiDosen extends AppCompatActivity {
     private PresensiDosenList adapter;
 
     private String url = Server.URL + "jadwal_dosen_aja.php";
-    private static final String TAG = PresensiDosen.class.getSimpleName();
+
+    SharedPreferences sharedpreferences;
+    public static final String my_shared_preferences = "my_shared_preferences";
+    String username ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,9 @@ public class PresensiDosen extends AppCompatActivity {
         ActionBar ac = getSupportActionBar();
         getSupportActionBar().setTitle("Presensi");
         ac.setDisplayHomeAsUpEnabled(true);
+
+        sharedpreferences = getSharedPreferences(my_shared_preferences, Context.MODE_PRIVATE);
+        username =  sharedpreferences.getString(Login.TAG_USERNAME, null);
 
         rv=(RecyclerView)findViewById(R.id.recyclerview);
         rv.setHasFixedSize(true);
@@ -67,6 +76,7 @@ public class PresensiDosen extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         //creating a string request to send request to the url
+        url = url+"?username="+username;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
             @Override

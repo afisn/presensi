@@ -100,28 +100,13 @@ public class BeritaAcara extends AppCompatActivity {
             }
         });
 
-//        kettxt = (TextView) findViewById(R.id.kettxt);
-//        materitxt = (TextView) findViewById(R.id.materitxt);
-//        metodetxt = (TextView) findViewById(R.id.metodetxt);
-//        tgltxt = (TextView) findViewById(R.id.tgltxt);
-
 //        calendar = Calendar.getInstance();
 //        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 //        date = simpleDateFormat.format(calendar.getTime());
 //        txttgl.setText(date);
 
-        String currentDateTimeString = DateFormat.getDateInstance().format(new Date());
-        txttgl.setText(currentDateTimeString);
-
-        //masukkan data mhs ke json array
-//        JSONArray jsonArray = new JSONArray((kump_mhs));
-
-        //data yang dipilih di hal sebelum
-//        for (int i = 0; i < PDCheck_list.list_data.size(); i++) {
-//            if (PDCheck_list.list_data.get(i).isSelected()) {
-////                JSONObject jsonObject = array.get(i);
-//            }
-//        }
+//        String currentDateTimeString = DateFormat.getDateInstance().format(new Date());
+//        txttgl.setText(currentDateTimeString);
 
         btn_simpan.setOnClickListener(new View.OnClickListener() {
 

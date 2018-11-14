@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.lenovoq.skripsiq.Coba.Expandablelist;
 import com.example.lenovoq.skripsiq.History.History_Dsn;
 import com.example.lenovoq.skripsiq.JadwalDsn.JadwalDosen;
 import com.example.lenovoq.skripsiq.Presensi.PresensiDosen;
@@ -69,7 +68,7 @@ public class MainActivityPengajar extends AppCompatActivity {
         });
         btn_history.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent o = new Intent(MainActivityPengajar.this, Expandablelist.class);
+                Intent o = new Intent(MainActivityPengajar.this, History_Dsn.class);
                 startActivity(o);
             }
         });

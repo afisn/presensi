@@ -19,8 +19,6 @@ import java.util.List;
 public class History_Dsn_List extends RecyclerView.Adapter<History_Dsn_List.ViewHolder> {
 
     private List<MatkulDosen_Obj> list_data;
-    private Animation animationUp;
-    private Animation animationDown;
 
     public History_Dsn_List(List<MatkulDosen_Obj> list_data) {
         this.list_data = list_data;
@@ -43,29 +41,29 @@ public class History_Dsn_List extends RecyclerView.Adapter<History_Dsn_List.View
         holder.txtnama_mk.setText(listData.getNama_mk());
         holder.txtkelas.setText(listData.getKelas());
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                int id = listData.getMet_id();
-//                Log.e("Afis", "id" + listData.getMet_id());
-//                Intent intent = new Intent(view.getContext(), PDCheck.class);
-//                intent.putExtra("Met_id",id);
-//                view.getContext().startActivity(intent);
-//            }
-//        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(History_Dsn.txtContent.isShown()){
-                    History_Dsn.txtContent.setVisibility(View.GONE);
-                    History_Dsn.txtContent.startAnimation(animationUp);
-                }
-                else{
-                    History_Dsn.txtContent.setVisibility(View.VISIBLE);
-                    History_Dsn.txtContent.startAnimation(animationDown);
-                }
+                int id = listData.getMet_id();
+                Log.e("Afis", "id" + listData.getMet_id());
+                Intent intent = new Intent(view.getContext(), Rekapan_History.class);
+                intent.putExtra("Met_id",id);
+                view.getContext().startActivity(intent);
             }
         });
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(History_Dsn.txtContent.isShown()){
+//                    History_Dsn.txtContent.setVisibility(View.GONE);
+//                    History_Dsn.txtContent.startAnimation(animationUp);
+//                }
+//                else{
+//                    History_Dsn.txtContent.setVisibility(View.VISIBLE);
+//                    History_Dsn.txtContent.startAnimation(animationDown);
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -80,8 +78,8 @@ public class History_Dsn_List extends RecyclerView.Adapter<History_Dsn_List.View
         public ViewHolder(View itemView) {
             super(itemView);
             txtmet_id = (TextView) itemView.findViewById(R.id.txtmet_id);
-            txtkd_mk = (TextView) itemView.findViewById(R.id.content_text_mk);
-            txtnama_mk = (TextView) itemView.findViewById(R.id.txtnama_mk);
+            txtkd_mk = (TextView) itemView.findViewById(R.id.txtkd_mk);
+            txtnama_mk = (TextView) itemView.findViewById(R.id.content_text_mk);
             txtkelas = (TextView) itemView.findViewById(R.id.txtkelas);
 
         }

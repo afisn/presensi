@@ -33,9 +33,11 @@
         <activity android:name=".Presensi.BeritaAcara"/>
         <activity android:name=".WifiDirect.Wifi_Main"/>
         <activity android:name=".History.History_Dsn"/>
-        <activity android:name=".Coba.Expandablelist"/>
-        <activity android:name=".JadwalMhs.PresensiMhs"/>
+        <activity android:name=".JadwalMhs.History_Mhs"/>
         <activity android:name=".WifiDirect.Wifi_Main_mhs"/>
+        <activity android:name=".History.Rekapan_History"/>
+        <activity android:name=".JadwalMhs.Rekap_Mhs"/>
+        <activity android:name=".WifiDirect.Ambik_Device"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

@@ -16,8 +16,11 @@ public class MatkulDosen_Obj {
         this.jam_selesai = jam_selesai;
     }
 
-    public MatkulDosen_Obj( String nama_mk) {
+    public MatkulDosen_Obj( int met_id, String kd_mk, String nama_mk, String kelas) {
+        this.met_id = met_id;
+        this.kd_mk = kd_mk;
         this.nama_mk = nama_mk;
+        this.kelas = kelas;
     }
 
     public int getMet_id() {

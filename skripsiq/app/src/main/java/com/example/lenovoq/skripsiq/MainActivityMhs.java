@@ -14,8 +14,7 @@ import android.widget.TextView;
 
 import com.example.lenovoq.skripsiq.JadwalMhs.JadwalMhs;
 import com.example.lenovoq.skripsiq.Help.Help;
-import com.example.lenovoq.skripsiq.JadwalMhs.PresensiMhs;
-import com.example.lenovoq.skripsiq.WifiDirect.Wifi_Main;
+import com.example.lenovoq.skripsiq.JadwalMhs.History_Mhs;
 import com.example.lenovoq.skripsiq.WifiDirect.Wifi_Main_mhs;
 
 
@@ -64,7 +63,7 @@ public class MainActivityMhs extends AppCompatActivity {
 
         btn_kehadiran.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent o = new Intent(MainActivityMhs.this, PresensiMhs.class);
+                Intent o = new Intent(MainActivityMhs.this, History_Mhs.class);
                 o.putExtra("username",username);
                 startActivity(o);
             }

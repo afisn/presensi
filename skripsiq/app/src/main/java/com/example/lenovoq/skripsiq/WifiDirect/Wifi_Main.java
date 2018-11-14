@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.net.wifi.WpsInfo;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
+import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.ActionListener;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
@@ -20,10 +21,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import com.example.lenovoq.skripsiq.R;
 
 import com.example.lenovoq.skripsiq.WifiDirect.DeviceListFragment.DeviceActionListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Wifi_Main extends AppCompatActivity implements ChannelListener, DeviceActionListener {
     public static final String TAG = "wifidirectdemo";
@@ -33,12 +38,18 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
     private final IntentFilter intentFilter = new IntentFilter();
     private Channel channel;
     private BroadcastReceiver receiver = null;
+    private Button btnok;
+
+    public static ArrayList<WifiP2pDevice> peers = new ArrayList<WifiP2pDevice>();
+
     /**
      * @param isWifiP2pEnabled the isWifiP2pEnabled to set
      */
     public void setIsWifiP2pEnabled(boolean isWifiP2pEnabled) {
         this.isWifiP2pEnabled = isWifiP2pEnabled;
     }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +61,20 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
         manager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
         channel = manager.initialize(this, getMainLooper(), null);
+        btnok = (Button) findViewById(R.id.btnok);
+
+//        Ambik_Device.kump_peers = new ArrayList<>();
         discover();
+
+        btnok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent o = new Intent(Wifi_Main.this, Ambik_Device.class);
+                o.putExtra("data", (ArrayList<WifiP2pDevice>) peers);
+                startActivity(o);
+            }
+        });
     }
     /** register the BroadcastReceiver with the intent values to be matched */
     @Override
@@ -110,6 +134,7 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
         }
     }
 
+
     public void discover(){
         if (!isWifiP2pEnabled) {
             Toast.makeText(Wifi_Main.this, R.string.p2p_off_warning,
@@ -119,10 +144,13 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
         final DeviceListFragment fragment = (DeviceListFragment) getFragmentManager()
                 .findFragmentById(R.id.frag_list);
         fragment.onInitiateDiscovery();
+
+
         manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
             @Override
             public void onSuccess() {
-                Toast.makeText(Wifi_Main.this, "Discovery Initiated",
+
+                Toast.makeText(Wifi_Main.this, "Discovery Initiated"+fragment.test,
                         Toast.LENGTH_SHORT).show();
             }
             @Override
@@ -155,6 +183,7 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
             }
         });
     }
+
     @Override
     public void disconnect() {
         final DeviceDetailFragment fragment = (DeviceDetailFragment) getFragmentManager()
@@ -185,6 +214,7 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
                     Toast.LENGTH_LONG).show();
         }
     }
+
     @Override
     public void cancelDisconnect() {
         /*

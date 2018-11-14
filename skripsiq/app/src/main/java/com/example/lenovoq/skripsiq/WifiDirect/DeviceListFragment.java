@@ -20,6 +20,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.lenovoq.skripsiq.Presensi.NamaMhs_Obj;
 import com.example.lenovoq.skripsiq.R;
 
 /**
@@ -27,14 +28,19 @@ import com.example.lenovoq.skripsiq.R;
  * parent activity to handle user interaction events
  */
 public class DeviceListFragment extends ListFragment implements PeerListListener {
-    private List<WifiP2pDevice> peers = new ArrayList<WifiP2pDevice>();
+    public static ArrayList<WifiP2pDevice> peers = new ArrayList<WifiP2pDevice>();
+    public static String test = "ini dari fragment";
     ProgressDialog progressDialog = null;
     View mContentView = null;
     private WifiP2pDevice device;
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.setListAdapter(new WiFiPeerListAdapter(getActivity(), R.layout.wifi_rowdevice, peers));
+        Wifi_Main.peers = peers;
+        Log.e("Afis ", "device kentang" + peers);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -128,7 +134,10 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
         }
         peers.clear();
         peers.addAll(peerList.getDeviceList());
+        Wifi_Main.peers = peers;
+        Log.d("Afis", "onPeersAvailable: "+peers);
         ((WiFiPeerListAdapter) getListAdapter()).notifyDataSetChanged();
+
         if (peers.size() == 0) {
             Log.d(Wifi_Main.TAG, "No devices found");
             return;
@@ -152,6 +161,12 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
 
                     }
                 });
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
     }
     /**
      * An interface-callback for the activity to listen to fragment interaction

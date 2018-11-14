@@ -8,17 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.lenovoq.skripsiq.Coba.Expandablelist;
+import com.example.lenovoq.skripsiq.History.History_Dsn;
 import com.example.lenovoq.skripsiq.R;
 
 import java.util.List;
 
-public class PresensiMhsList extends RecyclerView.Adapter<PresensiMhsList.ViewHolder> {
+public class History_MhsList extends RecyclerView.Adapter<History_MhsList.ViewHolder> {
 
     private List<JMahasiswa> list_data;
 
 
-    public PresensiMhsList(List<JMahasiswa> list_data) {
+    public History_MhsList(List<JMahasiswa> list_data) {
         this.list_data = list_data;
     }
 
@@ -42,7 +42,7 @@ public class PresensiMhsList extends RecyclerView.Adapter<PresensiMhsList.ViewHo
             public void onClick(View view) {
                 int id = listData.getMet_id();
                 Log.e("Afis", "id" + listData.getMet_id());
-                Intent intent = new Intent(view.getContext(), Expandablelist.class);
+                Intent intent = new Intent(view.getContext(), Rekap_Mhs.class);
                 intent.putExtra("Met_id", id);
                 view.getContext().startActivity(intent);
             }

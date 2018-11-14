@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- START OF HEAD LAYOUT -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:orientation="horizontal"
+        android:id="@+id/historypertemuan"
+        android:background="@color/colorPrimary">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pertemuan Ke"
+                android:id="@+id/pertemuan"
+                android:layout_alignParentLeft="true"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginBottom="5dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/itemPertemuan"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- END OF HEAD LAYOUT -->
+
+
+    <!-- START OF BODY LAYOUT -->
+    //BUAT REKAP MAHASISWAE
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#F3F3F3"
+        android:layout_gravity="center">
+
+        <!-- icon masuk -->
+        <ImageView
+            android:id="@+id/item_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_person_black_24dp"
+            />
+
+        <!-- counter -->
+        <TextView
+            android:id="@+id/item_counter"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ractangle"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!-- icon sakit-->
+        <ImageView
+            android:id="@+id/item_sakit"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_local_hotel_black_24dp"
+            />
+
+        <!-- counter -->
+        <TextView
+            android:id="@+id/item_counter_sakit"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ractangle"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!-- icon ijin-->
+        <ImageView
+            android:id="@+id/item_ijin"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_email_black_24dp"
+            />
+
+        <!-- counter -->
+        <TextView
+            android:id="@+id/item_counter_ijin"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ractangle"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!-- icon tugas-->
+        <ImageView
+            android:id="@+id/item_tugas"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="240dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_business_center_black_24dp"
+            />
+
+        <!-- counter -->
+        <TextView
+            android:id="@+id/item_counter_tugas"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="275dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ractangle"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!-- icon gamasuk -->
+        <ImageView
+            android:id="@+id/item_alpa"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="310dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_person_red_24dp"
+            />
+
+        <!-- counter -->
+        <TextView
+            android:id="@+id/item_counter_alpa"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="340dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ractangle"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    //keterangan pertemuan tersebut
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Metode Mengajar"
+                android:id="@+id/judulmetode"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:layout_marginBottom="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="120/75"
+                android:id="@+id/txtmetodenya"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                />
+        </LinearLayout>
+        
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Materi Bahasan"
+                android:id="@+id/judulmateri"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:layout_marginBottom="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="120/75"
+                android:id="@+id/txtmaterinya"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Keterangan"
+                android:id="@+id/judulket"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:layout_marginBottom="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="120/75"
+                android:id="@+id/txtketnya"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

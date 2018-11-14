@@ -30,10 +30,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PresensiMhs extends AppCompatActivity {
+public class History_Mhs extends AppCompatActivity {
     private List<JMahasiswa> list_data;
     private RecyclerView rv;
-    private PresensiMhsList adapter;
+    private History_MhsList adapter;
 
     private String url = Server.URL + "jadwal_mhs_aja.php";
     private static final String TAG = JadwalMhs.class.getSimpleName();
@@ -97,7 +97,7 @@ public class PresensiMhs extends AppCompatActivity {
                     }
                     //rv.setAdapter(adapter);
                     Log.d("list_data",String.valueOf(list_data.size()));
-                    adapter=new PresensiMhsList(list_data);
+                    adapter=new History_MhsList(list_data);
                     rv.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

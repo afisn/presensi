@@ -97,6 +97,7 @@ public class JadwalDosen extends AppCompatActivity {
                                     ,ob.getString("Nama_MK"),ob.getString("Kelas"),ob.getString("hari")
                                     ,ob.getString("jam_mulai"),ob.getString("jam_selesai"),ob.getString("pengajar"));
                             list_data.add(listData);
+                            Log.d("Afis",String.valueOf(list_data));
                         }
                         //rv.setAdapter(adapter);
                         Log.d("list_data",String.valueOf(list_data.size()));
