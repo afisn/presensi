@@ -39,8 +39,9 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
     private Channel channel;
     private BroadcastReceiver receiver = null;
     private Button btnok;
+    private int met_id;
 
-    public static ArrayList<WifiP2pDevice> peers = new ArrayList<WifiP2pDevice>();
+    public static List<WifiP2pDevice> peers = new ArrayList<WifiP2pDevice>();
 
     /**
      * @param isWifiP2pEnabled the isWifiP2pEnabled to set
@@ -63,6 +64,8 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
         channel = manager.initialize(this, getMainLooper(), null);
         btnok = (Button) findViewById(R.id.btnok);
 
+        met_id = getIntent().getIntExtra("Met_id", 0);
+        Log.e("afis", "met_id" + met_id);
 //        Ambik_Device.kump_peers = new ArrayList<>();
         discover();
 
@@ -70,8 +73,9 @@ public class Wifi_Main extends AppCompatActivity implements ChannelListener, Dev
             @Override
             public void onClick(View v) {
 
-                Intent o = new Intent(Wifi_Main.this, Ambik_Device.class);
+                Intent o = new Intent(Wifi_Main.this, Daftar_Mhs.class);
                 o.putExtra("data", (ArrayList<WifiP2pDevice>) peers);
+                o.putExtra("Met_id", met_id);
                 startActivity(o);
             }
         });

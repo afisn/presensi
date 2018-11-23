@@ -38,6 +38,8 @@
         <activity android:name=".History.Rekapan_History"/>
         <activity android:name=".JadwalMhs.Rekap_Mhs"/>
         <activity android:name=".WifiDirect.Ambik_Device"/>
+        <activity android:name=".WifiDirect.MatkulDosen"/>
+        <activity android:name=".WifiDirect.Daftar_Mhs"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -46,6 +48,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-feature android:name="android.hardware.wifi.direct" android:required="true"/>
 
 </manifest>

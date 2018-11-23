@@ -2,15 +2,24 @@ package com.example.lenovoq.skripsiq;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.net.wifi.p2p.WifiP2pDevice;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -25,13 +34,16 @@ import com.example.lenovoq.skripsiq.Volley.Server;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.NetworkInterface;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 public class Login extends Activity {
     ProgressDialog pDialog;
-    Button  btn_login;
+    Button btn_login;
     EditText txt_username, txt_password;
 
     int success;
@@ -53,6 +65,7 @@ public class Login extends Activity {
     String role, username;
     public static final String my_shared_preferences = "my_shared_preferences";
     public static final String session_status = "session_status";
+    private String address, name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +92,13 @@ public class Login extends Activity {
         role = sharedpreferences.getString(TAG_ROLE, null);
         username = sharedpreferences.getString(TAG_USERNAME, null);
 
-        if (session) {
+        address = getMacAddr();
+        Log.e("Afis",address );
+
+//        name = getPhoneName();
+//        Log.e("Afis", name);
+
+//        if (session) {
 //            if(role.equalsIgnoreCase("mhs")) {
 //                // Memanggil main activity
 //                Intent intent = new Intent(Login.this, MainActivityMhs.class);
@@ -93,13 +112,13 @@ public class Login extends Activity {
 //                intent.putExtra(TAG_USERNAME, username);
 //                finish();
 //                startActivity(intent);
-//            }
-            Intent intent = new Intent(Login.this, MainActivityPengajar.class);
-            intent.putExtra(TAG_ROLE, role);
-            intent.putExtra(TAG_USERNAME, username);
-            finish();
-            startActivity(intent);
-        }
+////            }
+//            Intent intent = new Intent(Login.this, MainActivityPengajar.class);
+//            intent.putExtra(TAG_ROLE, role);
+//            intent.putExtra(TAG_USERNAME, username);
+//            finish();
+//            startActivity(intent);
+//        }
 
         btn_login.setOnClickListener(new View.OnClickListener() {
 
@@ -114,19 +133,55 @@ public class Login extends Activity {
                     if (conMgr.getActiveNetworkInfo() != null
                             && conMgr.getActiveNetworkInfo().isAvailable()
                             && conMgr.getActiveNetworkInfo().isConnected()) {
-                        simpanData(username,password,"s");
-                        checkLogin(username, password,"c");
+                        simpanData(username, password, "s");
+                        checkLogin(username, password, "c");
                     } else {
-                        Toast.makeText(getApplicationContext() ,"No Internet Connection", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
                     }
                 } else {
                     // Prompt user to enter credentials
-                    Toast.makeText(getApplicationContext() ,"Kolom tidak boleh kosong", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Kolom tidak boleh kosong", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
 
+    }
+
+    public String getPhoneName() {
+        BluetoothAdapter myDevice = BluetoothAdapter.getDefaultAdapter();
+        String deviceName = myDevice.getName();
+        return deviceName;
+    }
+
+    public static String getMacAddr() {
+        String ret = "";
+        try {
+            List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface nif : all) {
+                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
+
+//                WifiP2pDevice device = items.get(position);
+                byte[] macBytes = nif.getHardwareAddress();
+//                Log.d("nif", android.os.Build.MODEL);
+                if (macBytes == null) {
+                    return "";
+                }
+                Log.e("mac", String.valueOf(macBytes));
+                StringBuilder res1 = new StringBuilder();
+                for (byte b : macBytes) {
+
+                    res1.append(String.format("%02X:", b));
+                }
+
+                if (res1.length() > 0) {
+                    res1.deleteCharAt(res1.length() - 1);
+                }
+                ret = res1.toString();
+            }
+        } catch (Exception ex) {
+        }
+        return ret;
     }
 
     private void checkLogin(final String username, final String password, final String act) {
@@ -166,7 +221,7 @@ public class Login extends Activity {
                         editor.commit();
 
                         //role untuk login
-                        if(role.equalsIgnoreCase("mhs")) {
+                        if (role.equalsIgnoreCase("mhs")) {
                             // Memanggil main activity
                             Intent intent = new Intent(Login.this, MainActivityMhs.class);
                             intent.putExtra(TAG_USERNAME, username);
@@ -209,8 +264,9 @@ public class Login extends Activity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("username", username);
                 params.put("password", password);
+                params.put("address", address);
                 //---
-                params.put("action",act);
+                params.put("action", act);
 
                 return params;
             }
@@ -221,7 +277,7 @@ public class Login extends Activity {
         AppController.getInstance().addToRequestQueue(strReq, tag_json_obj);
     }
 
-    private void simpanData(final String username, final String password,final String act) {
+    private void simpanData(final String username, final String password, final String act) {
 //        String url_simpan = Server.URL + "insert_login.php";
 //        String tag_json = "tag_json";
 //
@@ -231,7 +287,7 @@ public class Login extends Activity {
 
         StringRequest strReq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
-                public void onResponse(String response) {
+            public void onResponse(String response) {
                 Log.d("response", response.toString());
                 hideDialog();
 
@@ -262,8 +318,9 @@ public class Login extends Activity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("username", username);
                 params.put("password", password);
+                params.put("address", address);
                 // ---
-                params.put("action",act);
+                params.put("action", act);
                 return params;
             }
         };

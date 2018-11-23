@@ -31,7 +31,7 @@ public class MainActivityMhs extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activitymain_mhs);
-        txt_id = (TextView) findViewById(R.id.txt_id);
+//        txt_id = (TextView) findViewById(R.id.txt_id);
         txt_username = (TextView) findViewById(R.id.txt_username);
         btn_jadwal = (Button) findViewById(R.id.btn_jadwal);
         btn_presensi = (Button) findViewById(R.id.btn_presensi_wifi);
@@ -43,8 +43,8 @@ public class MainActivityMhs extends AppCompatActivity {
         username = getIntent().getStringExtra(TAG_USERNAME);
 
 
-        txt_id.setText("ID : " + id);
-        txt_username.setText("USERNAME : " + username);
+//        txt_id.setText("ID : " + id);
+        txt_username.setText("Selamat Datang! " + username);
         btn_jadwal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent o = new Intent(MainActivityMhs.this, JadwalMhs.class);

@@ -28,7 +28,7 @@ import com.example.lenovoq.skripsiq.R;
  * parent activity to handle user interaction events
  */
 public class DeviceListFragment extends ListFragment implements PeerListListener {
-    public static ArrayList<WifiP2pDevice> peers = new ArrayList<WifiP2pDevice>();
+    public static List<WifiP2pDevice> peers = new ArrayList<WifiP2pDevice>();
     public static String test = "ini dari fragment";
     ProgressDialog progressDialog = null;
     View mContentView = null;
@@ -129,13 +129,15 @@ public class DeviceListFragment extends ListFragment implements PeerListListener
     }
     @Override
     public void onPeersAvailable(WifiP2pDeviceList peerList) {
+        Log.d("testadrian",peerList.toString());
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
         peers.clear();
         peers.addAll(peerList.getDeviceList());
+        //Log.d("testadrian",peerList.getDeviceList().toString());
         Wifi_Main.peers = peers;
-        Log.d("Afis", "onPeersAvailable: "+peers);
+        //Log.d("Afis", "onPeersAvailable: "+peers);
         ((WiFiPeerListAdapter) getListAdapter()).notifyDataSetChanged();
 
         if (peers.size() == 0) {

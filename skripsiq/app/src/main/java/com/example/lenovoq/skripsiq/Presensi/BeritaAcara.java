@@ -3,8 +3,10 @@ package com.example.lenovoq.skripsiq.Presensi;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
+import com.example.lenovoq.skripsiq.Login;
 import com.example.lenovoq.skripsiq.MainActivityPengajar;
 import com.example.lenovoq.skripsiq.R;
 import com.example.lenovoq.skripsiq.Volley.AppController;
@@ -46,14 +49,18 @@ import java.util.Map;
 public class BeritaAcara extends AppCompatActivity {
 
     ProgressDialog pDialog;
-    private TextView tgltxt, metodetxt, materitxt, kettxt;
+//    private TextView tgltxt, metodetxt, materitxt, kettxt;
     private Button btn_simpan;
-    private EditText txttgl, txtmetode, txtmateri, txtket,jamawaltxt, jamakhirtxt;
+    private EditText txttgl, txtmetode, txtmateri, txtket,txtjamawaltxt, txtjamakhirtxt, txtperke;
     private Calendar myCalendar = Calendar.getInstance();
     private SimpleDateFormat dateFormat;
     private String date;
     public static ArrayList<NamaMhs_Obj> kump_mhs;
     private int met_id;
+
+    SharedPreferences sharedpreferences;
+    public static final String my_shared_preferences = "my_shared_preferences";
+    String username ;
 
     private String url = Server.URL + "berita_acara.php";
     ConnectivityManager conMgr;
@@ -69,11 +76,15 @@ public class BeritaAcara extends AppCompatActivity {
         txtmateri = (EditText) findViewById(R.id.txtmateri);
         txtmetode = (EditText) findViewById(R.id.txtmetode);
         txtket = (EditText) findViewById(R.id.txtket);
-        jamawaltxt = (EditText) findViewById(R.id.jamAwaltxt);
-        jamakhirtxt = (EditText) findViewById(R.id.jamAkhirtxt);
+        txtjamawaltxt = (EditText) findViewById(R.id.jamAwaltxt);
+        txtjamakhirtxt = (EditText) findViewById(R.id.jamAkhirtxt);
+        txtperke = (EditText) findViewById(R.id.txtper);
 
         met_id = getIntent().getIntExtra("Met_id", 0);
         Log.e("afis", "met_id" + met_id);
+
+        sharedpreferences = getSharedPreferences(my_shared_preferences, Context.MODE_PRIVATE);
+        username =  sharedpreferences.getString(Login.TAG_USERNAME, null);
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -125,8 +136,11 @@ public class BeritaAcara extends AppCompatActivity {
                                 String metode = txtmetode.getText().toString();
                                 String materi = txtmateri.getText().toString();
                                 String cat = txtket.getText().toString();
+                                int perke = Integer.parseInt(txtperke.getText().toString());
+                                String jamawal = txtjamawaltxt.getText().toString();
+                                String jamakhir = txtjamakhirtxt.getText().toString();
                                 if (metode.trim().length() > 0 && materi.trim().length() > 0) {
-                                    simpanData(tgl,metode,materi,cat, kump_mhs);
+                                    simpanData(tgl,metode,materi,cat, kump_mhs, perke, jamawal,jamakhir);
                                 } else {
                                     // Prompt user to enter credentials
                                     Toast.makeText(getApplicationContext(), "Data belum terisi", Toast.LENGTH_LONG).show();
@@ -146,13 +160,14 @@ public class BeritaAcara extends AppCompatActivity {
     }
 
     private void updateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "MM/dd/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         txttgl.setText(sdf.format(myCalendar.getTime()));
     }
 
-    public void simpanData(final String tgl,final String metode, final String materi, final String cat, final ArrayList<NamaMhs_Obj> kump_mhs) {
+    public void simpanData(final String tgl, final String metode, final String materi, final String cat, final ArrayList<NamaMhs_Obj> kump_mhs,
+                           final int perke, final String jamawal, final String jamakhir) {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Processing ...");
@@ -171,6 +186,8 @@ public class BeritaAcara extends AppCompatActivity {
                     String hasil = jObject.getString("result");
                     if (hasil.equalsIgnoreCase("true")) {
                         Toast.makeText(BeritaAcara.this, pesan, Toast.LENGTH_SHORT).show();
+                        Intent o = new Intent(BeritaAcara.this, MainActivityPengajar.class);
+                        startActivity(o);
                     } else {
                         Toast.makeText(BeritaAcara.this, pesan, Toast.LENGTH_SHORT).show();
                     }
@@ -190,6 +207,8 @@ public class BeritaAcara extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
+                params.put("username", username);
+                params.put("met_id", String.valueOf(met_id));
                 params.put("tanggal", tgl);
                 params.put("metode", metode);
                 params.put("materi_bahasan", materi);
@@ -198,7 +217,7 @@ public class BeritaAcara extends AppCompatActivity {
                 //JSONObject jsonObject = new JSONObject();
                 /*
 
-*/
+                */
                 Gson gson = new Gson();
                 Type type = new TypeToken<ArrayList<NamaMhs_Obj>>() {}.getType();
                 String json = gson.toJson(kump_mhs, type);
@@ -207,6 +226,9 @@ public class BeritaAcara extends AppCompatActivity {
 //                ArrayList<NamaMhs_Obj> fromJson = gson.fromJson(json, type);
                 //Log.d("Afis", "Json Array: "+jsArray.toString());
                 params.put("kump_mhs",json );
+                params.put("perke", String.valueOf(perke));
+                params.put("jamawal", jamawal);
+                params.put("jamakhir", jamakhir);
                 return params;
             }
         };

@@ -16,6 +16,7 @@ import com.example.lenovoq.skripsiq.History.History_Dsn;
 import com.example.lenovoq.skripsiq.JadwalDsn.JadwalDosen;
 import com.example.lenovoq.skripsiq.Presensi.PresensiDosen;
 import com.example.lenovoq.skripsiq.Help.Help;
+import com.example.lenovoq.skripsiq.WifiDirect.MatkulDosen;
 import com.example.lenovoq.skripsiq.WifiDirect.Wifi_Main;
 
 public class MainActivityPengajar extends AppCompatActivity {
@@ -31,7 +32,7 @@ public class MainActivityPengajar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activitymain_pengajar);
-        txt_id = (TextView) findViewById(R.id.txt_id);
+//        txt_id = (TextView) findViewById(R.id.txt_id);
         txt_username = (TextView) findViewById(R.id.txt_username);
         btn_jadwal = (Button) findViewById(R.id.btn_jadwal);
         btn_presensi = (Button) findViewById(R.id.btn_presensi);
@@ -43,8 +44,8 @@ public class MainActivityPengajar extends AppCompatActivity {
         id = getIntent().getStringExtra(TAG_ID);
         username = getIntent().getStringExtra(TAG_USERNAME);
 
-        txt_id.setText("ID : " + id);
-        txt_username.setText("USERNAME : " + username);
+//        txt_id.setText("ID : " + id);
+        txt_username.setText("Selamat Datang! " + username);
 
         btn_jadwal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -62,7 +63,7 @@ public class MainActivityPengajar extends AppCompatActivity {
 
         btn_presensiplus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent o = new Intent(MainActivityPengajar.this, Wifi_Main.class);
+                Intent o = new Intent(MainActivityPengajar.this, MatkulDosen.class);
                 startActivity(o);
             }
         });
